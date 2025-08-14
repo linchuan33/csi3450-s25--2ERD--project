@@ -5,20 +5,18 @@ include_once '../includes/db_connection.php';
 
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
-$faculty = [
-    'FACULTY_ID' => 1,
-    'FACULTY_LNAME' => 'Smith',
-    'FACULTY_FNAME' => 'John',
-    'FACULTY_EMAIL' => 'jsmith@tinycollege.edu',
-    'DEPARTMENT_CODE' => 'CS'
-];
+$query = "SELECT * FROM faculty WHERE FACULTY_ID = ?";
+$stmt = executeQuery($query, [$id]);
+$faculty = $stmt->fetch();
 
-$departments = [
-    ['DEPARTMENT_CODE' => 'CS', 'DEPARTMENT_NAME' => 'Computer Science'],
-    ['DEPARTMENT_CODE' => 'ENG', 'DEPARTMENT_NAME' => 'Engineering'],
-    ['DEPARTMENT_CODE' => 'MATH', 'DEPARTMENT_NAME' => 'Mathematics'],
-    ['DEPARTMENT_CODE' => 'BUS', 'DEPARTMENT_NAME' => 'Business']
-];
+if (!$faculty) {
+    header("Location: list.php");
+    exit;
+}
+
+$deptQuery = "SELECT * FROM department";
+$deptStmt = executeQuery($deptQuery);
+$departments = $deptStmt->fetchAll();
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">

@@ -5,14 +5,19 @@ include_once '../includes/db_connection.php';
 
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
-$faculty = [
-    'FACULTY_ID' => 1,
-    'FACULTY_LNAME' => 'Smith',
-    'FACULTY_FNAME' => 'John',
-    'FACULTY_EMAIL' => 'jsmith@tinycollege.edu',
-    'DEPARTMENT_CODE' => 'CS',
-    'DEPARTMENT_NAME' => 'Computer Science'
-];
+$query = "SELECT * FROM faculty WHERE FACULTY_ID = ?";
+$stmt = executeQuery($query, [$id]);
+$faculty = $stmt->fetch();
+
+if (!$faculty) {
+    header("Location: list.php");
+    exit;
+}
+
+$deptQuery = "SELECT DEPARTMENT_NAME FROM department WHERE DEPARTMENT_CODE = ?";
+$deptStmt = executeQuery($deptQuery, [$faculty['DEPARTMENT_CODE']]);
+$department = $deptStmt->fetch();
+$departmentName = $department ? $department['DEPARTMENT_NAME'] : $faculty['DEPARTMENT_CODE'];
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -30,7 +35,7 @@ $faculty = [
     <div class="card-body">
         <h5 class="card-title"><?php echo $faculty['FACULTY_FNAME'] . ' ' . $faculty['FACULTY_LNAME']; ?></h5>
         <p class="card-text"><strong>Email:</strong> <?php echo $faculty['FACULTY_EMAIL']; ?></p>
-        <p class="card-text"><strong>Department:</strong> <?php echo $faculty['DEPARTMENT_NAME']; ?> (<?php echo $faculty['DEPARTMENT_CODE']; ?>)</p>
+        <p class="card-text"><strong>Department:</strong> <?php echo $departmentName; ?> (<?php echo $faculty['DEPARTMENT_CODE']; ?>)</p>
     </div>
 </div>
 
