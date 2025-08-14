@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny College TFBS Center</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tiny College (TFBS) Center</h1>
+        <nav>
+            <ul>
+                <li><a href="#reservation-form">Reservation Form</a></li>
+                <li><a href="#view-reservations">View Reservations</a></li>
+                <li><a href="#vehicle-status">Vehicle Status</a></li>
+                <li><a href="#maintenance">Maintenance</a></li>
+                <li><a href="#parts">Parts</a></li>
+                <li><a href="#reports">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="reservation-form">
+            <h2>Reservation Form</h2>
+            <form id="reservationForm">
+                <label for="facultyName">Faculty Name:</label>
+                <input type="text" id="facultyName" name="facultyName" required>
+                
+                <label for="vehicleType">Vehicle Type:</label>
+                <select id="vehicleType" name="vehicleType" required>
+                    <option value="sedan">Sedan</option>
+                    <option value="stationWagon">Station Wagon</option>
+                    <option value="panelTruck">Panel Truck</option>
+                    <option value="minivan">Minivan</option>
+                    <option value="minibus">Minibus</option>
+                </select>
+                
+                <label for="expectedDeparture">Expected Departure Date:</label>
+                <input type="date" id="expectedDeparture" name="expectedDeparture" required>
+                
+                <label for="expectedReturn">Expected Return Date:</label>
+                <input type="date" id="expectedReturn" name="expectedReturn" required>
+                
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination" required>
+                
+                <button type="submit">Submit Reservation</button>
+            </form>
+        </section>
+
+        <section id="view-reservations">
+            <h2>View Existing Reservations</h2>
+            <table id="reservationsTable">
+                <thead>
+                    <tr>
+                        <th>Reservation ID</th>
+                        <th>Faculty Name</th>
+                        <th>Vehicle Type</th>
+                        <th>Departure Date</th>
+                        <th>Return Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Reservation rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="vehicle-status">
+            <h2>Vehicle Status</h2>
+            <table id="vehicleStatusTable">
+                <thead>
+                    <tr>
+                        <th>Vehicle ID</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Vehicle status rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="maintenance">
+            <h2>Maintenance</h2>
+            <form id="maintenanceForm">
+                <label for="vehicleId">Vehicle ID:</label>
+                <input type="text" id="vehicleId" name="vehicleId" required>
+                
+                <label for="maintenanceDescription">Maintenance Description:</label>
+                <textarea id="maintenanceDescription" name="maintenanceDescription" required></textarea>
+                
+                <button type="submit">Initiate Maintenance</button>
+            </form>
+        </section>
+
+        <section id="parts">
+            <h2>Parts</h2>
+            <table id="partsTable">
+                <thead>
+                    <tr>
+                        <th>Part ID</th>
+                        <th>Description</th>
+                        <th>Recommended Min Quantity</th>
+                        <th>Actual Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Parts rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="reports">
+            <h2>Monthly Reports</h2>
+            <form id="reportForm">
+                <label for="reportMonth">Month:</label>
+                <input type="month" id="reportMonth" name="reportMonth" required>
+                
+                <button type="submit">Generate Report</button>
+            </form>
+            <div id="reportResults">
+                <!-- Report results will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Group 2ERD-Tiny College</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
