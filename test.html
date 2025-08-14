@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Information System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #333;
+        }
+        .buttons {
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+        .section {
+            display: none;
+        }
+        .section h2 {
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .info p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Car Information System</h1>
+        </div>
+        <div class="buttons">
+            <button id="new-user-btn">New User</button>
+            <button id="check-car-info-btn">Check My Car Info</button>
+        </div>
+
+        <div class="section" id="existing-user-section">
+            <h2>Check My Car Info</h2>
+            <form id="existing-user-form">
+                <div class="form-group">
+                    <label for="existing-user-name">Name:</label>
+                    <input type="text" id="existing-user-name" name="existing-user-name" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+            <div class="info" id="existing-user-info" style="display: none;">
+                <p><strong>Name:</strong> Lee</p>
+                <p><strong>Car Model:</strong> Honda Civic</p>
+                <p><strong>Last Maintenance:</strong> Aug 11, 2024</p>
+                <p><strong>License Plate:</strong> LIN47</p>
+            </div>
+        </div>
+
+        <div class="section" id="new-user-section">
+            <h2>New User</h2>
+            <form id="new-user-form">
+                <div class="form-group">
+                    <label for="new-user-name">Name:</label>
+                    <input type="text" id="new-user-name" name="new-user-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-user-car-model">Car Model:</label>
+                    <input type="text" id="new-user-car-model" name="new-user-car-model" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-user-license-plate">License Plate:</label>
+                    <input type="text" id="new-user-license-plate" name="new-user-license-plate" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-user-last-maintenance">Last Maintenance:</label>
+                    <input type="date" id="new-user-last-maintenance" name="new-user-last-maintenance" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('new-user-btn').addEventListener('click', function() {
+            document.getElementById('new-user-section').style.display = 'block';
+            document.getElementById('existing-user-section').style.display = 'none';
+        });
+
+        document.getElementById('check-car-info-btn').addEventListener('click', function() {
+            document.getElementById('existing-user-section').style.display = 'block';
+            document.getElementById('new-user-section').style.display = 'none';
+        });
+
+        document.getElementById('existing-user-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('existing-user-name').value;
+            if (name === 'Lee') {
+                document.getElementById('existing-user-info').style.display = 'block';
+            } else {
+                alert('No information found for this user.');
+            }
+        });
+
+        document.getElementById('new-user-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('new-user-name').value;
+            const carModel = document.getElementById('new-user-car-model').value;
+            const licensePlate = document.getElementById('new-user-license-plate').value;
+            const lastMaintenance = document.getElementById('new-user-last-maintenance').value;
+
+            const newUserInfo = document.createElement('div');
+            newUserInfo.className = 'info';
+            newUserInfo.innerHTML = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Car Model:</strong> ${carModel}</p>
+                <p><strong>License Plate:</strong> ${licensePlate}</p>
+                <p><strong>Last Maintenance:</strong> ${lastMaintenance}</p>
+            `;
+            document.getElementById('new-user-section').appendChild(newUserInfo);
+        });
+    </script>
+</body>
+</html>
