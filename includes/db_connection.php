@@ -1,5 +1,5 @@
 <?php
-$host = 'localhost';
+$host = '127.0.0.1'; // Changed from 'localhost' to '127.0.0.1'
 $dbname = 'tiny_college_vmdb';
 $username = 'root';
 $password = '';
@@ -12,7 +12,15 @@ try {
     die("Connection failed: " . $e->getMessage());
 }
 
-function simulateQuery($query) {
-    return [];
+// Replace the simulateQuery function with executeQuery function
+function executeQuery($query, $params = []) {
+    global $pdo;
+    try {
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($params);
+        return $stmt;
+    } catch(PDOException $e) {
+        die("Query failed: " . $e->getMessage());
+    }
 }
 ?>
